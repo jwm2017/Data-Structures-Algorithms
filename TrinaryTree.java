@@ -1,10 +1,7 @@
 /**
  * @author josephmcadams Oct 11, 2015 -- 2015
  */
-/*
- * // The following definitions of Tree and Node are provided. // insert and
- * delete will be methods of class Tree.
- */
+
 public class Tree
 {
 	private Node	root;
@@ -48,10 +45,7 @@ public class Tree
 				searchNode.mid = nodeToAdd;
 		}
 	}
-	/*
-	 * Please complete this method. Inserts val into the tree. There is no need
-	 * to rebalance the tree.
-	 */
+
 	public void insert(int val)
 	{
 		Node newNode = new Node(val);
@@ -84,14 +78,9 @@ public class Tree
 		}
 	}
 
-	/*
-	 * Please complete this method. Deletes only one instance of val from the
-	 * tree. If val does not exist in the tree, do nothing. There is no need to
-	 * rebalance the tree.
-	 */
 	public void delete(int val)
 	{
-		if (this.root == null) return; //should exit code
+		if (this.root == null) return; 
 		
 		Node parent = null;
 		Node nodeToRemove = this.root;
@@ -165,36 +154,4 @@ public class Tree
 			}
 		}
 	}
-
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args)
-	{
-
-		Tree tree = new Tree();
-		tree.insert(11);
-		tree.insert(6);
-		tree.insert(11);
-		tree.insert(13);
-		tree.insert(12);
-		tree.insert(15);
-		tree.insert(5);
-		tree.insert(8);
-		
-		System.out.println("Root is: " + tree.root.val);
-		System.out.println("Level 1: " + tree.root.left.val + " " + tree.root.mid.val + " " + tree.root.right.val);
-		System.out.println("level 2: " + tree.root.left.left.val + " " + tree.root.left.right.val + 
-				" " + tree.root.right.left.val + " " + tree.root.right.right.val);
-		
-		tree.delete(6);
-		tree.delete(13);
-		
-		System.out.println("Root is: " + tree.root.val);
-		System.out.println("Level 1: " + tree.root.left.val + " " + tree.root.mid.val + " " + tree.root.right.val);
-		System.out.println("Level 2: " + tree.root.left.left.val + " " + tree.root.right.left.val);
-		
-		
-	}
-
 }
