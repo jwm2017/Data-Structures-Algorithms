@@ -1,2 +1,21 @@
-# Data-Structures-Algorithms
-Implementations of things I want to practice
+# Data Structures
+Linked Lists
+
+Graphs
+
+Trees
+
+Heaps
+
+Hashmaps
+
+Bitmaps
+
+# Algorithms
+Merge Sort
+
+Quick Sort
+
+Heap Sort
+
+
