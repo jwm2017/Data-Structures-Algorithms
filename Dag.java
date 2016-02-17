@@ -10,7 +10,7 @@ public class Dag {
 
   public class Node {
     public List<Node> Successors;
-    public T value;
+    public T Value;
 
     public Node(T val) {
       value = val;
