@@ -1,3 +1,11 @@
+/*
+ * Code written by:
+ * Joe McAdams
+ * for COSC 3100
+ *
+ *
+ */
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Stack;
@@ -6,14 +14,23 @@ import java.util.Stack;
 public class Dag {
 
   private Node root;
-  private Stack edgeStack;
+  private Stack edgeStack;               //To keep track of visited nodes
+  private ArrayList<Integer> OutputQueue; //To print out traversal path
 
   public Dag(Node rNode, Stack s) {
     root = rNode;
     edgeStack = s;
+    OutputQueue = new ArrayList<>();
   }
 
-  public void Traversal(Dag dagToSort) {
+  public void Traverse(Node root) {
+    if (root.Successors.size() == 0)
+      System.out.print(root.Value);
+    else {
+      int indOfSmallSucc = findSmallest(root.Successors);
+
+    }
+
     //push root onto Stack
     //check if there are Successors
       //if there are, push the one with the lowest Value
@@ -24,19 +41,20 @@ public class Dag {
 
   }
   /*
-   * sorting method for a simple ArrayList of integers,
+   * Sorting method for a simple ArrayList of integers,
    * taking the ArrayList as input, returning the index
    * of the smallest element in the ArrayList. If called on
    * empty ArrayList, returns -1
    */
-  public static int findSmallest(ArrayList<Integer> list) {
+  private static int findSmallest(ArrayList<Integer> list) {
     if (list.size() == 0)
       return -1;
     else {
-      int smallest = list.get(0);
+      //by default, the smallest element is the first one
+      int smallest = 0;
       for (int i: list) {
-        if (list.get(i) < smallest) {
-          smallest = i;
+        if (i < smallest) {
+          smallest = list.indexOf(i);
         }
       }
       return smallest;
@@ -63,14 +81,6 @@ public class Dag {
   }
 
   public static void main(String[] args) {
-    ArrayList<Integer> testList = new ArrayList<>();
-    testList.add(3);
-    testList.add(1);
-    testList.add(4);
-    testList.add(6);
-    testList.add(9);
-    testList.add(0);
-    int result = findSmallest(testList);
-    System.out.printf("Expected index of 5, received: %2d", result);
+
   }
 }
