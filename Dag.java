@@ -2,8 +2,6 @@
  * Code written by:
  * Joe McAdams
  * for COSC 3100
- *
- *
  */
 
 import java.io.*;
@@ -14,7 +12,7 @@ import java.util.Stack;
 public class Dag {
 
   private Node root;
-  private Stack edgeStack;               //To keep track of visited nodes
+  private Stack edgeStack;                //To keep track of visited nodes
   private ArrayList<Integer> OutputQueue; //To print out traversal path
 
   public Dag(Node rNode, Stack s) {
@@ -23,11 +21,11 @@ public class Dag {
     OutputQueue = new ArrayList<>();
   }
 
-  public void Traverse(Node root) {
-    if (root.Successors.size() == 0)
-      System.out.print(root.Value);
+  public void Traverse(Node parent) {
+    if (parent.Successors.size() == 0)
+      System.out.print(parent.Value);
     else {
-      int indOfSmallSucc = findSmallest(root.Successors);
+      int indOfSmallSucc = findSmallest(parent.Successors);
 
     }
 
