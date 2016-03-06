@@ -51,11 +51,11 @@ def main():
     print('charList after sorting: \n' + charList + '\n\n')
     """
     data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-    left = [data:[x:x+1] for x in range(0, (len(data)/2))]
-    right = [data:[x:x+1] for x in range((len(data)/2), len(data))]
-    print("Data: " + data)
-    print("Left: " + left)
-    print("Right: " + right)
+    left = data[:len(data)/2]
+    right = data[len(data)/2:]
+    print("Data: " + str(data))
+    print("Left: " + str(left))
+    print("Right: " + str(right))
 
 if __name__ == '__main__':
     main()
