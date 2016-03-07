@@ -9,12 +9,21 @@ class MergeSort:
     """
     def sort(self):
         mergeSort(self.list)
-    """
+
     def mergeSort(arr):
         if len(arr) == 1
             return arr
         else:
-            leftArr =
+            leftArr = arr[:len(arr)/2]
+            rightArr = arr[len(arr)/2:]
+            merge(leftArr)
+            merge(rightArr)
+            return merge(leftArr, rightArr)
+
+    def merge(lArr, rArr):
+        mergedArr
+
+
         if start is None:
             start = 0
         if end is None:
@@ -33,7 +42,6 @@ class MergeSort:
         indOfRightArr = mid + 1
         indOfLeftArr = start
         while (index)
-    """
 
 
 
