@@ -17,38 +17,85 @@ public abstract class BaseApproach {
 
     public BaseApproach(int[] inputList) {
         this.List = inputList;
-        this.Mode = 0;          // default value
-        this.FreqOfMode = 0;    // default value
+        this.Mode = -1;          // default value
+        this.FreqOfMode = -1;    // default value
     }
 
-    public abstract void FindMode();
-}
+    public abstract void CalculateMode();
 
-class BruteForce extends BaseApproach {
 
-    public HashMap MappedVals;
+    class BruteForce extends BaseApproach {
 
-    public BruteForce(int[] inputList) {
-        super(inputList);
-        this.MappedVals = new HashMap();
+        public HashMap<Integer, Integer> FreqOfValsMap;
+
+        public BruteForce(int[] inputList) {
+            super(inputList);
+            this.FreqOfValsMap = new HashMap<Integer, Integer>(inputList.length); // Size = inputList's size
+        }
+
+        public void CalculateMode() {
+            for(int val:this.List) { // For each value in the inputList, map each element to its frequency
+                if (!FreqOfValsMap.containsKey(val)) {
+                    FreqOfValsMap.put(val, 1);
+                    if (1 > this.FreqOfMode) {
+                        this.Mode = val;
+                        this.FreqOfMode = 1;
+                    }
+                }
+                else { // val already an entry in FreqOfValsMap
+                    int freqOfVal = FreqOfValsMap.get(val);
+                    freqOfVal++;
+                    if (freqOfVal > this.FreqOfMode) { // val in List occurs most frequently
+                        this.Mode = val;
+                        this.FreqOfMode = freqOfVal;
+                    }
+                }
+            }
+        }
     }
 
-    public void FindMode() {
+    class TransformNConquer extends BaseApproach {
 
+        public TransformNConquer(int[] inputList) {
+            super(inputList);
+        }
+
+        public void CalculateMode() {
+            mergeSort();
+            int lastValue;
+            int count;
+            for (int i = 0; i < this.List.length; i++) {
+                if (i == 0) { // Set this.Mode to the first element in inputList by default
+                    lastValue = this.Mode = this.List[i];
+                    count = this.FreqOfMode = 1;
+                }
+                else if (this.List[i] == lastValue)
+                count++;
+                else { // Unique element in inputList found
+                    lastValue = this.List[i];
+                    if (count > this.FreqOfMode) {
+                        this.FreqOfMode = count;
+                        this.Mode = lastValue;
+                    }
+                    else {
+                        lastValue = this.List[i];
+                        count = 1; // reset count to 1 for new value
+                    }
+                }
+            }
+        }
+
+        private void mergeSort() {
+
+        }
     }
-}
 
-class TransformNConquer extends BaseApproach {
-
-    public TransformNConquer(int[] inputList) {
-        super(inputList);
-    }
-
-    public void FindMode() {
-        mergeSort(this.List);
-    }
-
-    private void mergeSort(int[] listToSort) {
-
+    public static void main(String[] args) {
+        int[] sortedList = {0, 0, 0, 1, 1, 1, 1, 2, 2, 3, 3, 3};
+        TransformNConquer fastApproach =
+            new TransformNConquer(sortedList);
+        fastApproach.CalculateMode();
+        System.out.println(fastApproach.Mode);
+        System.out.println(fastApproach.FreqOfMode);
     }
 }
