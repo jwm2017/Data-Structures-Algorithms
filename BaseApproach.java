@@ -24,7 +24,7 @@ public abstract class BaseApproach {
     public abstract void CalculateMode();
 
 
-    class BruteForce extends BaseApproach {
+    public static class BruteForce extends BaseApproach {
 
         public HashMap<Integer, Integer> FreqOfValsMap;
 
@@ -49,12 +49,13 @@ public abstract class BaseApproach {
                         this.Mode = val;
                         this.FreqOfMode = freqOfVal;
                     }
+                    FreqOfValsMap.put(val, FreqOfValsMap.get(val) + 1); // update freq val
                 }
             }
         }
     }
 
-    class TransformNConquer extends BaseApproach {
+    public static class TransformNConquer extends BaseApproach {
 
         public TransformNConquer(int[] inputList) {
             super(inputList);
@@ -62,15 +63,15 @@ public abstract class BaseApproach {
 
         public void CalculateMode() {
             mergeSort();
-            int lastValue;
-            int count;
+            int lastValue = -1;  // initialize to keep compiler happy
+            int count = -1;      // initialize to keep compiler happy
             for (int i = 0; i < this.List.length; i++) {
                 if (i == 0) { // Set this.Mode to the first element in inputList by default
                     lastValue = this.Mode = this.List[i];
                     count = this.FreqOfMode = 1;
                 }
                 else if (this.List[i] == lastValue)
-                count++;
+                    count++;
                 else { // Unique element in inputList found
                     lastValue = this.List[i];
                     if (count > this.FreqOfMode) {
@@ -97,5 +98,9 @@ public abstract class BaseApproach {
         fastApproach.CalculateMode();
         System.out.println(fastApproach.Mode);
         System.out.println(fastApproach.FreqOfMode);
+        /*BruteForce slowApproach =
+            new BruteForce(sortedList);
+        slowApproach.CalculateMode();*/
+
     }
 }
