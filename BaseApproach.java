@@ -7,7 +7,7 @@
 * with love.
 */
 
-import java.util.HashMap;
+import java.util.*;
 
 public abstract class BaseApproach {
 
@@ -22,6 +22,50 @@ public abstract class BaseApproach {
     }
 
     public abstract void CalculateMode();
+
+    /*
+     * Code from:
+     * https://www.cs.cmu.edu/~adamchik/15-121/lectures/Sorting%20Algorithms/code/MergeSort.java
+     */
+    public static class mergeSort {
+
+        public static void Sort(int[] a) {
+            int[] tmp = new int[a.length];
+            sort(a, tmp,  0,  a.length - 1);
+        }
+
+        private static void sort(int[] a, int[] tmp, int left, int right) {
+            if( left < right ) {
+                int center = (left + right) / 2;
+                sort(a, tmp, left, center);
+                sort(a, tmp, center + 1, right);
+                merge(a, tmp, left, center + 1, right);
+            }
+        }
+
+        private static void merge(int[] a, int[] tmp, int left, int right, int rightEnd ) {
+            int leftEnd = right - 1;
+            int k = left;
+            int num = rightEnd - left + 1;
+
+            while(left <= leftEnd && right <= rightEnd) {
+                if (a[left] < a[right])
+                    tmp[k++] = a[left++];
+                else
+                    tmp[k++] = a[right++];
+            }
+
+            while(left <= leftEnd)    // Copy rest of first half
+                tmp[k++] = a[left++];
+
+            while(right <= rightEnd)  // Copy rest of right half
+                tmp[k++] = a[right++];
+
+            // Copy tmp back
+            for(int i = 0; i < num; i++, rightEnd--)
+            a[rightEnd] = tmp[rightEnd];
+        }
+    }
 
     public static class BruteForce extends BaseApproach {
 
@@ -40,12 +84,15 @@ public abstract class BaseApproach {
                     if (List[i] == List[j])
                         localFreq++;
                 }
-
-
+                if (localFreq > this.FreqOfMode) {
+                    this.FreqOfMode = localFreq;
+                    this.Mode = List[i];
+                }
             }
         }
 
     }
+
     public static class FastestApproach extends BaseApproach {
 
         public HashMap<Integer, Integer> FreqOfValsMap;
@@ -88,7 +135,7 @@ public abstract class BaseApproach {
         }
 
         public void CalculateMode() {
-            mergeSort();
+            mergeSort.Sort(this.List);
             int lastValue = -1;  // initialize to keep compiler happy
             int count = -1;      // initialize to keep compiler happy
             for (int i = 0; i < this.List.length; i++) {
@@ -108,15 +155,23 @@ public abstract class BaseApproach {
                 }
             }
         }
-
-        private void mergeSort() {
-
-        }
-
-        private void mergeSort()
     }
 
     public static void main(String[] args) {
-        int[] sortedList = {0, 0, 0, 1, 1, 1, 1, 2, 2, 3, 3, 3};
+        int[] unsortedList = {3, 2, 3, 5, 6, 7, 8, 2, 3, 3, 9, 9};
+        BruteForce slow = new BruteForce(unsortedList);
+        System.out.println(System.currentTimeMillis());
+        slow.CalculateMode();
+        System.out.println(System.currentTimeMillis());
+        System.out.println("Slow's mode: " + slow.Mode);
+        System.out.println("Slow's freq: " + slow.FreqOfMode);
+
+        TransformNConquer fast = new TransformNConquer(unsortedList);
+
+        System.out.println(System.currentTimeMillis());
+        fast.CalculateMode();
+        System.out.println(System.currentTimeMillis());
+        System.out.println("Fast's mode: " + fast.Mode);
+        System.out.println("Fast's freq: " + fast.FreqOfMode);
     }
 }
