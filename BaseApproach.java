@@ -23,19 +23,45 @@ public abstract class BaseApproach {
 
     public abstract void CalculateMode();
 
-
     public static class BruteForce extends BaseApproach {
-
-        public HashMap<Integer, Integer> FreqOfValsMap;
 
         public BruteForce(int[] inputList) {
             super(inputList);
-            this.FreqOfValsMap = new HashMap<Integer, Integer>(inputList.length); // Size = inputList's size
         }
 
         public void CalculateMode() {
-            for(int val:this.List) { // For each value in the inputList, map each element to its frequency
-                if (!FreqOfValsMap.containsKey(val)) {
+            int localMode, localFreq;
+            for (int i = 0; i < List.length; i++) {
+                localMode = List[i];
+                localFreq = 1;
+                for (int j = 0; j < List.length; j++) {
+                    if (i == j) // To avoid counting same element twice
+                        continue;
+                    if (List[i] == List[j])
+                        localFreq++;
+                }
+
+
+            }
+        }
+
+    }
+    public static class FastestApproach extends BaseApproach {
+
+        public HashMap<Integer, Integer> FreqOfValsMap;
+
+        public FastestApproach(int[] inputList) {
+            super(inputList);
+            this.FreqOfValsMap = new HashMap<Integer, Integer>();
+        }
+
+        /*
+         * Iterate through each value of this.List, mapping each value
+         * to its frequency in this.FreqOfValsMap
+         */
+        public void CalculateMode() {
+            for(int val:this.List) {
+                if (!FreqOfValsMap.containsKey(val)) { // Value not mapped in FreqOfValsMap
                     FreqOfValsMap.put(val, 1);
                     if (1 > this.FreqOfMode) {
                         this.Mode = val;
@@ -45,7 +71,7 @@ public abstract class BaseApproach {
                 else { // val already an entry in FreqOfValsMap
                     int freqOfVal = FreqOfValsMap.get(val);
                     freqOfVal++;
-                    if (freqOfVal > this.FreqOfMode) { // val in List occurs most frequently
+                    if (freqOfVal > this.FreqOfMode) {
                         this.Mode = val;
                         this.FreqOfMode = freqOfVal;
                     }
@@ -70,18 +96,15 @@ public abstract class BaseApproach {
                     lastValue = this.Mode = this.List[i];
                     count = this.FreqOfMode = 1;
                 }
-                else if (this.List[i] == lastValue)
+                else if (this.List[i] == lastValue) // Repeat of previous value found
                     count++;
                 else { // Unique element in inputList found
-                    lastValue = this.List[i];
                     if (count > this.FreqOfMode) {
                         this.FreqOfMode = count;
                         this.Mode = lastValue;
                     }
-                    else {
-                        lastValue = this.List[i];
-                        count = 1; // reset count to 1 for new value
-                    }
+                    lastValue = this.List[i];
+                    count = 1; // reset count to 1 for new value
                 }
             }
         }
@@ -89,18 +112,11 @@ public abstract class BaseApproach {
         private void mergeSort() {
 
         }
+
+        private void mergeSort()
     }
 
     public static void main(String[] args) {
         int[] sortedList = {0, 0, 0, 1, 1, 1, 1, 2, 2, 3, 3, 3};
-        TransformNConquer fastApproach =
-            new TransformNConquer(sortedList);
-        fastApproach.CalculateMode();
-        System.out.println(fastApproach.Mode);
-        System.out.println(fastApproach.FreqOfMode);
-        /*BruteForce slowApproach =
-            new BruteForce(sortedList);
-        slowApproach.CalculateMode();*/
-
     }
 }
