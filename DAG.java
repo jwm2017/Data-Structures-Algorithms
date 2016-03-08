@@ -1,8 +1,8 @@
 /*
-* Code written by:
-* Joe McAdams
-* for COSC 3100
-*/
+ * Code written by:
+ * Joe McAdams
+ * for COSC 3100
+ */
 
 import java.io.*;
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ import java.util.Stack;
  * descendant to an ancestor), so nodes should not have a
  * reference to their parent; parents, however, can have
  * multiple child nodes, so these are stored in an ArrayList
- * due to the in-built function of ArrayLists (see class structure
+ * due to the in-built functionality of ArrayLists (see class structure
  * of the Node class). The edge stack will be used to pop and push
  * nodes to keep track of parent nodes in a traversal. Once a node
  * has no children, this node is popped onto the fOrderStack which,
@@ -51,12 +51,12 @@ public class DAG {
              * to isolate unvisited nodes.
              */
             while (indOfSmallSucc != -1) {
-                Node nextNode = parent.Successors.get(indOfSmallSucc);
-                visitStack.push(nextNode);
-                traverseRecursively(nextNode);
-                parent.Successors.remove(indOfSmallSucc);
-                indOfSmallSucc = findSmallest(parent.Successors);
-            }
+                    Node nextNode = parent.Successors.get(indOfSmallSucc);
+                    visitStack.push(nextNode);
+                    traverseRecursively(nextNode);
+                    parent.Successors.remove(indOfSmallSucc);
+                    indOfSmallSucc = findSmallest(parent.Successors);
+                }
             fOrderStack.push(parent);
         }
         else {
