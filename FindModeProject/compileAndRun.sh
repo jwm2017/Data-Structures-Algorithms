@@ -16,3 +16,4 @@ echo "Running TestCases.java, writing results to results.txt..."
 # Run the main method, piping the results to a local file
 java approaches.TestCases > results.txt
 
+echo "Completed."
