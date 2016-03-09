@@ -11,3 +11,5 @@ Because Java's package system is pretty painful, I wrote a simple shell script t
 Go to ../FindModeProject
 
 Then type "./compileAndRun" in a terminal window
+
+A new file "results.txt" should be added; this will contain the results of the main method in TestCases.java
