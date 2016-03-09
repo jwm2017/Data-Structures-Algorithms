@@ -41,7 +41,7 @@ public class TestCases {
     private static void populateWithRanVals(int[] list) {
         int random;
         for (int i = 0; i < list.length; i++) {
-            random = (int)(Math.random() * 1000 + 1);
+            random = (int)(Math.random() * 100 + 1);
             list[i] = random;
         }
     }
