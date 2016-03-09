@@ -1,6 +1,6 @@
 # Introduction
 
-For this assignment, I implemented three approaches to finding a mode and its frequency in an array of integer values. All Approach classes inherit from the BaseApproach class which has one abstract method CalculateMode(), and the fields Mode, FreqOfMode, and List. Also included is a slightly modified MergeSort implementation that handles array inputs (as Java's Collections.sort() method onlyworks with ArrayLists). The TestCases class holds the main method for the project.
+For this assignment, I implemented three approaches to finding a mode and its frequency in an array of integer values. All Approach classes inherit from the BaseApproach class which has one abstract method CalculateMode(), and the fields Mode, FreqOfMode, and List. Also included is a slightly modified MergeSort implementation that handles array inputs (as Java's Collections.sort() method only works with ArrayLists). The TestCases class holds the main method for the project.
 
 # Setup
 
