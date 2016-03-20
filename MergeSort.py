@@ -4,21 +4,22 @@ class MergeSort:
         self.list = list
 
     def sort(self):
-        mergeSort(self.list)
+        self.mergeSort(self.list)
 
-    def mergeSort(arr):
+    def mergeSort(self, arr):
         if (len(arr) == 1):
             return arr
         else:
             leftArr = arr[:len(arr)/2]
             rightArr = arr[len(arr)/2:]
-            merge(leftArr)
-            merge(rightArr)
-            return merge(leftArr, rightArr)
+            self.mergeSort(leftArr)
+            self.mergeSort(rightArr)
+            return self.merge(leftArr, rightArr)
 
-    def merge(leftArr, rightArr):
-        mergedArray
-        leftIndex, rightIndex
+    def merge(self, leftArr, rightArr):
+        mergedArray = []
+        leftIndex = 0
+        rightIndex = 0
         while (leftIndex < len(leftArr) and rightIndex < len(rightArr)):
             if (leftArr[leftIndex] > rightArr[rightIndex]):
                 mergedArray.append(rightArr[rightIndex])
@@ -32,19 +33,12 @@ class MergeSort:
         while (rightIndex < len(rightArr)):
             mergedArray.append(rightArr[rightIndex])
             rightIndex += 1
+        print ([str(item) for item in mergedArray])
         return mergedArray
 
 def main():
     intList = MergeSort([4, 1, 5, 8, 9, 3, 3, 6, 7, 10, -5, -12])
-    print('intList before sorting: \n' + str(intList) + '\n\n')
     intList.sort()
-    print('intList after sorting: \n' + str(intList) + '\n\n')
-    print(intList)
-
-    charList = MergeSort(['a', 'z', 'c', 'b', 'f', 'e', 'y', 'p'])
-    print('charList before sorting: \n' + str(charList) + '\n\n')
-    charList.sort()
-    print('charList after sorting: \n' + str(charList) + '\n\n')
 
 if __name__ == '__main__':
     main()
