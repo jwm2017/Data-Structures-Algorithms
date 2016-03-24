@@ -4,7 +4,7 @@ class MergeSort:
         self.list = list
 
     def sort(self):
-        self.mergeSort(self.list)
+        self.list = self.mergeSort(self.list)
 
     def mergeSort(self, arr):
         if (len(arr) == 1):
@@ -12,9 +12,9 @@ class MergeSort:
         else:
             leftArr = arr[:len(arr)/2]
             rightArr = arr[len(arr)/2:]
-            self.mergeSort(leftArr)
-            self.mergeSort(rightArr)
-            return self.merge(leftArr, rightArr)
+            leftSorted = self.mergeSort(leftArr)
+            rightSorted = self.mergeSort(rightArr)
+            return self.merge(leftSorted, rightSorted)
 
     def merge(self, leftArr, rightArr):
         mergedArray = []
@@ -33,12 +33,13 @@ class MergeSort:
         while (rightIndex < len(rightArr)):
             mergedArray.append(rightArr[rightIndex])
             rightIndex += 1
-        print ([str(item) for item in mergedArray])
         return mergedArray
 
 def main():
     intList = MergeSort([4, 1, 5, 8, 9, 3, 3, 6, 7, 10, -5, -12])
+    print(str(intList.list))
     intList.sort()
+    print(str(intList.list))
 
 if __name__ == '__main__':
     main()
